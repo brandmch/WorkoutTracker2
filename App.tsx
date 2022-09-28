@@ -4,7 +4,7 @@ import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
-import HomeScreen from "./components/screens/home";
+import Nav from "./components/navigation";
 
 const theme = {
   ...DefaultTheme,
@@ -13,7 +13,7 @@ const theme = {
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <HomeScreen />
+      <Nav />
     </PaperProvider>
   );
 }
