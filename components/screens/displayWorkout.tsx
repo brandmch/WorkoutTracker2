@@ -12,13 +12,26 @@ export default function DisplayWorkout({ navigation, route }: any) {
       .catch((error) => console.log(error));
   }, []);
 
+  const workoutName = () => {
+    const mySentence = workout?.name;
+    const words = workout?.name.split(" ");
+
+    if (words) {
+      for (let i = 0; i < words.length; i++) {
+        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+      }
+
+      return words.join(" ");
+    } else {
+      return mySentence;
+    }
+  };
+
   return (
     <ScrollView>
+      <Text variant="headlineLarge">{workoutName()}</Text>
       <Text>{workout?.bodyPart}</Text>
       <Text>{workout?.equipment}</Text>
-      <Text>{workout?.gifUrl}</Text>
-      <Text>{workout?.id}</Text>
-      <Text>{workout?.name}</Text>
       <Text>{workout?.target}</Text>
       {Platform.OS === "android" && (
         <Image
