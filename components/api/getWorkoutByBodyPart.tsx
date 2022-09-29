@@ -4,7 +4,7 @@ import { Workout } from "../types/workout.interface";
 export default async function getWorkoutByBodyPart(props: any) {
   let bodyPart = props;
 
-  return fetch("http://192.168.1.34:4000/getWorkoutsByBodyPart", {
+  return await fetch("http://192.168.1.34:4000/getWorkoutsByBodyPart", {
     method: "POST",
     headers: {
       Accept: "application/json",

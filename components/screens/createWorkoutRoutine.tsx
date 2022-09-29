@@ -19,6 +19,9 @@ export default function CreateWorkoutRoutine({ navigation }: any) {
   if (goDisabled && routine.length > 0) {
     setGoDisabled(false);
   }
+  if (!goDisabled && routine.length === 0) {
+    setGoDisabled(true);
+  }
 
   return (
     <View>
@@ -27,7 +30,10 @@ export default function CreateWorkoutRoutine({ navigation }: any) {
           setNumberOfWorkouts([...numberOfWorkouts, numberOfWorkouts.push(i)]);
           i++;
         }}
-        onLongPress={() => setNumberOfWorkouts([])}
+        onLongPress={() => {
+          setNumberOfWorkouts([]);
+          setRoutine([]);
+        }}
       >
         Add Excerise
       </Button>

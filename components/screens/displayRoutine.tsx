@@ -14,18 +14,23 @@ export default function DisplayRoutine({ navigation, route }: any) {
   >([]);
   const { routine } = route.params;
 
-  routine.map((title: string) => {
-    getWorkoutByBodyPart(title)
-      .then((res: Workout) =>
-        setArrayOfExcersieObjects([...arrayOfExcersieObjects, res])
-      )
-      .catch((error) => console.log(error));
-  });
+  let tempArray: Workout[] = [];
 
-  console.log(arrayOfExcersieObjects);
+  useEffect(() => {
+    routine.map((title: string) => {
+      getWorkoutByBodyPart(title)
+        .then((res) => tempArray.push(res))
+        .then(() => {
+          if (tempArray.length === routine.length) {
+            setArrayOfExcersieObjects(tempArray);
+          }
+        })
+        .catch((error) => console.log(error));
+    });
+  }, []);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {arrayOfExcersieObjects.map((exceriseInstance) => {
         return (
           <WorkoutInstance
