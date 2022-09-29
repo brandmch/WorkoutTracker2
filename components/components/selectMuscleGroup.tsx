@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { List } from "react-native-paper";
 
-export default function SelectMuscleGroup({ navigation }: any) {
+export default function SelectMuscleGroup(props: any) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [listTitle, setListTitle] = useState<String>("Muscle groups");
   return (
@@ -14,71 +14,81 @@ export default function SelectMuscleGroup({ navigation }: any) {
       <List.Item
         title="Back"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "back" });
           setListTitle("Back");
+          props.setBodyPart("back");
+          setIsExpanded(false);
         }}
       />
       <List.Item
         title="Cardio"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "cardio" });
           setListTitle("Cardio");
+          props.setBodyPart("cardio");
+          setIsExpanded(false);
         }}
       />
       <List.Item
         title="Chest"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "chest" });
           setListTitle("Chest");
+          props.setBodyPart("chest");
+          setIsExpanded(false);
         }}
       />
       <List.Item
         title="Lower Arms"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "lower arms" });
           setListTitle("Lower Arms");
+          props.setBodyPart("lower arms");
+          setIsExpanded(false);
         }}
       />
       <List.Item
         title="Lower Legs"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "lower legs" });
           setListTitle("Lower Legs");
+          props.setBodyPart("lower legs");
+          setIsExpanded(false);
         }}
       />
       <List.Item
         title="Neck"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "neck" });
           setListTitle("Neck");
+          props.setBodyPart("neck");
+          setIsExpanded(false);
         }}
       />
       <List.Item
         title="Shoulders"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "shoulders" });
           setListTitle("Shoulders");
+          props.setBodyPart("shoulders");
+          setIsExpanded(false);
         }}
       />
       <List.Item
         title="Upper Arms"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "upper arms" });
           setListTitle("Upper Arms");
+          props.setBodyPart("upper arms");
+          setIsExpanded(false);
         }}
       />
       <List.Item
         title="Upper Legs"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "upper legs" });
           setListTitle("Upper Legs");
+          props.setBodyPart("upper legs");
+          setIsExpanded(false);
         }}
       />
       <List.Item
         title="Waist"
         onPress={() => {
-          navigation.navigate("DisplayWorkout", { part: "waist" });
           setListTitle("Waist");
+          props.setBodyPart("waist");
+          setIsExpanded(false);
         }}
       />
     </List.Accordion>

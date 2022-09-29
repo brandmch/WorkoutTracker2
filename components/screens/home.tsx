@@ -8,7 +8,7 @@ import SelectMuscleGroup from "../components/selectMuscleGroup";
 import WorkoutInstance from "../components/workoutInstance";
 
 export default function HomeScreen({ navigation }: any) {
-  const [bodyPart, setBodyPart] = useState<string>("");
+  const [bodyPart, setBodyPart] = useState<string>();
   const [numOfWorkouts, setNumOfSorkouts] = useState<number[]>([]);
   let i = 0;
 
@@ -26,6 +26,7 @@ export default function HomeScreen({ navigation }: any) {
         setBodyPart={setBodyPart}
       />
       <Button
+        style={{ marginVertical: "5%" }}
         onPress={() => {
           setNumOfSorkouts([...numOfWorkouts, numOfWorkouts.push(i)]);
           i++;
@@ -36,7 +37,7 @@ export default function HomeScreen({ navigation }: any) {
         Add Workout
       </Button>
       {numOfWorkouts.map((x) => {
-        return <WorkoutInstance bodyPart={bodyPart} />;
+        return <WorkoutInstance key={x} bodyPart={bodyPart} />;
       })}
       <StatusBar style="auto" />
     </ScrollView>
