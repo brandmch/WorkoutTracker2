@@ -4,14 +4,13 @@ import { Text, Button, List } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
 import newWorkout from "../api/getWorkout";
 import { Workout } from "../types/workout.interface";
+import SelectMuscleGroup from "../components/selectMuscleGroup";
+import WorkoutInstance from "../components/workoutInstance";
 
 export default function HomeScreen({ navigation }: any) {
-  const [workout, setWorkout] = useState<Workout>();
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
-
-  useEffect(() => {
-    newWorkout().then((res: Workout) => setWorkout(res));
-  }, []);
+  const [bodyPart, setBodyPart] = useState<string>("");
+  const [numOfWorkouts, setNumOfSorkouts] = useState<number[]>([]);
+  let i = 0;
 
   return (
     <ScrollView
@@ -21,93 +20,24 @@ export default function HomeScreen({ navigation }: any) {
       }}
       contentContainerStyle={{ alignItems: "center", justifyContent: "center" }}
     >
+      <SelectMuscleGroup
+        navigation={navigation}
+        bodyPart={bodyPart}
+        setBodyPart={setBodyPart}
+      />
       <Button
-        onPress={() => navigation.navigate("DisplayWorkout")}
+        onPress={() => {
+          setNumOfSorkouts([...numOfWorkouts, numOfWorkouts.push(i)]);
+          i++;
+        }}
+        onLongPress={() => setNumOfSorkouts([])}
         mode="contained"
       >
-        Workout
+        Add Workout
       </Button>
-
-      <List.Accordion
-        title="Muscle groups"
-        style={{ width: 200 }}
-        onPress={() => setIsExpanded(!isExpanded)}
-        expanded={isExpanded}
-      >
-        <List.Item
-          title="Back"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "back" })
-          }
-        />
-        <List.Item
-          title="Cardio"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "cardio" })
-          }
-        />
-        <List.Item
-          title="Chest"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "chest" })
-          }
-        />
-        <List.Item
-          title="Lower Arms"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "lower arms" })
-          }
-        />
-        <List.Item
-          title="Lower Legs"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "lower legs" })
-          }
-        />
-        <List.Item
-          title="Neck"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "neck" })
-          }
-        />
-        <List.Item
-          title="Shoulders"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "shoulders" })
-          }
-        />
-        <List.Item
-          title="Upper Arms"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "upper arms" })
-          }
-        />
-        <List.Item
-          title="Upper Legs"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "upper legs" })
-          }
-        />
-        <List.Item
-          title="Waist"
-          onPress={() =>
-            navigation.navigate("DisplayWorkout", { part: "waist" })
-          }
-        />
-      </List.Accordion>
-
-      <Text>{workout?.bodyPart}</Text>
-      <Text>{workout?.equipment}</Text>
-      <Text>{workout?.gifUrl}</Text>
-      <Text>{workout?.id}</Text>
-      <Text>{workout?.name}</Text>
-      <Text>{workout?.target}</Text>
-      {Platform.OS === "android" && (
-        <Image
-          style={{ width: 300, height: 300 }}
-          source={{ uri: `${workout?.gifUrl}` }}
-        />
-      )}
+      {numOfWorkouts.map((x) => {
+        return <WorkoutInstance bodyPart={bodyPart} />;
+      })}
       <StatusBar style="auto" />
     </ScrollView>
   );
