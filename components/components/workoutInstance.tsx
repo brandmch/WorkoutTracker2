@@ -5,13 +5,7 @@ import getWorkoutByBodyPart from "../api/getWorkoutByBodyPart";
 import { Workout } from "../types/workout.interface";
 
 export default function WorkoutInstance(props: any) {
-  const [workout, setWorkout] = useState<Workout>();
-
-  useEffect(() => {
-    getWorkoutByBodyPart(props.bodyPart)
-      .then((res) => setWorkout(res))
-      .catch((error) => console.log(error));
-  }, []);
+  const { workout } = props;
 
   const workoutName = () => {
     const mySentence = workout?.name;
