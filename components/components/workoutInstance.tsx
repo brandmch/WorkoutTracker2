@@ -3,24 +3,12 @@ import { View, Image } from "react-native";
 import { Text, List } from "react-native-paper";
 import getWorkoutByBodyPart from "../api/getWorkoutByBodyPart";
 import { Workout } from "../types/workout.interface";
+import capitalize from "../utills/uppercase";
 
 export default function WorkoutInstance(props: any) {
   let workout: Workout = props.workout;
 
-  const workoutName = () => {
-    const mySentence = workout?.name;
-    const words = workout?.name.split(" ");
-
-    if (words) {
-      for (let i = 0; i < words.length; i++) {
-        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-      }
-
-      return words.join(" ");
-    } else {
-      return mySentence;
-    }
-  };
+  const workoutName = () => capitalize(workout?.name);
 
   return (
     <View style={{ flex: 1, width: "100%", marginBottom: 10 }}>

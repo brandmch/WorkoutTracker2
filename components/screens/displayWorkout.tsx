@@ -3,6 +3,7 @@ import { Text } from "react-native-paper";
 import { useState, useEffect } from "react";
 import { Workout } from "../types/workout.interface";
 import getWorkoutByBodyPart from "../api/getWorkoutByBodyPart";
+import capitalize from "../utills/uppercase";
 
 export default function DisplayWorkout({ navigation, route }: any) {
   const [workout, setWorkout] = useState<Workout>();
@@ -12,20 +13,7 @@ export default function DisplayWorkout({ navigation, route }: any) {
       .catch((error) => console.log(error));
   }, []);
 
-  const workoutName = () => {
-    const mySentence = workout?.name;
-    const words = workout?.name.split(" ");
-
-    if (words) {
-      for (let i = 0; i < words.length; i++) {
-        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-      }
-
-      return words.join(" ");
-    } else {
-      return mySentence;
-    }
-  };
+  const workoutName = () => capitalize(workout?.name);
 
   return (
     <ScrollView>
