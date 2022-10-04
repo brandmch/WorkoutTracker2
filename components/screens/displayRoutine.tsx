@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, Image, Platform, ScrollView } from "react-native";
-import { Text, Button, List, Snackbar } from "react-native-paper";
+import { Text, Button, List, Snackbar, Divider } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
 import newWorkout from "../api/getWorkout";
 import { Workout } from "../types/workout.interface";

@@ -1,5 +1,6 @@
-const capitalize = (words: any) => {
+const capitalize = (words: String) => {
   if (words) {
+    console.log(words);
     let capitalName = words.split(" ");
 
     if (capitalName) {
