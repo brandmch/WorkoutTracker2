@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { View, Image, Platform, ScrollView } from "react-native";
-import { Text, Button, List, Snackbar } from "react-native-paper";
+import { Text, Button, List, Snackbar, Divider } from "react-native-paper";
 import SelectMuscleGroup from "../components/selectMuscleGroup";
+import SelectMuscleGroupAndNumber from "../components/selectMuscleGroup+Number";
+import Workout from "../interfaces/workout";
 
 let i = 0;
+let j = 0;
 export default function CreateWorkoutRoutine({ navigation }: any) {
   const [numberOfWorkouts, setNumberOfWorkouts] = useState<number[]>([]);
   const [routine, setRoutine] = useState<string[]>([]);
   const [goDisabled, setGoDisabled] = useState<boolean>(true);
 
-  console.log("routine", routine);
+  const [numberOfBodyGroups, setNumberOfBodyGroups] = useState<number[]>([]);
+  const [workoutObjectList, setWorkoutObjectList] = useState<Workout[]>([]);
 
   if (goDisabled && routine.length > 0) {
     setGoDisabled(false);
@@ -19,38 +23,40 @@ export default function CreateWorkoutRoutine({ navigation }: any) {
   }
 
   return (
-    <View>
+    <ScrollView>
       <Button
         onPress={() => {
-          setNumberOfWorkouts([...numberOfWorkouts, numberOfWorkouts.push(i)]);
-          i++;
+          setNumberOfBodyGroups([
+            ...numberOfBodyGroups,
+            numberOfBodyGroups.push(j),
+          ]);
+          j++;
         }}
         onLongPress={() => {
-          setNumberOfWorkouts([]);
-          setRoutine([]);
+          setNumberOfBodyGroups([]);
         }}
       >
-        Add Excerise
+        Add Body Group
       </Button>
-      {numberOfWorkouts.map((exceriseInstance) => {
+      {numberOfBodyGroups.map((bodyGroup) => {
         return (
-          <SelectMuscleGroup
-            key={exceriseInstance}
-            locationInRoutine={exceriseInstance - 1}
-            setRoutine={setRoutine}
-            routine={routine}
-          />
+          <View key={bodyGroup}>
+            <SelectMuscleGroupAndNumber
+              locationInRoutine={bodyGroup - 1}
+              setWorkoutObjectList={setWorkoutObjectList}
+              workoutObjectList={workoutObjectList}
+            />
+          </View>
         );
       })}
       <Button
+        mode="contained"
         onPress={() =>
           navigation.navigate("DisplayRoutine", { routine: routine })
         }
-        mode="contained"
-        disabled={goDisabled}
       >
         GO!
       </Button>
-    </View>
+    </ScrollView>
   );
 }

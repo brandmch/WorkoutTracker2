@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { View } from "react-native";
-import { List, Divider } from "react-native-paper";
+import { View, ScrollView } from "react-native";
+import { List, Divider, Menu } from "react-native-paper";
 
 export default function SelectMuscleGroup(props: any) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -114,7 +114,6 @@ export default function SelectMuscleGroup(props: any) {
           }}
         />
       </List.Accordion>
-      <Divider />
     </View>
   );
 }

@@ -30,7 +30,7 @@ export default function DisplayRoutine({ navigation, route }: any) {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       {arrayOfExcersieObjects.map((exceriseInstance) => {
         return (
           <WorkoutInstance
@@ -39,6 +39,6 @@ export default function DisplayRoutine({ navigation, route }: any) {
           />
         );
       })}
-    </View>
+    </ScrollView>
   );
 }
